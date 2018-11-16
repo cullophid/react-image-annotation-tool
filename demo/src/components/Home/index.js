@@ -29,10 +29,9 @@ export default class App extends Component {
         <Hero>
           <Title>Image annotation tool</Title>
           <Subtitle>
-            Inspired by react-image-annotation
+            Try it out by hovering the image
           </Subtitle>
         </Hero>
-        <h3>Try it out by hoverring the image</h3>
         <Simple />
       </Container>
     )

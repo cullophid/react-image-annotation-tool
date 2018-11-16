@@ -7,7 +7,6 @@ const Footer = styled.div`
   padding-bottom: 32px;
   text-align: center;
   a {
-    color: inherit;
     text-decoration: none;
     &:hover {
       color: #222;
@@ -17,6 +16,7 @@ const Footer = styled.div`
 
 export default () => (
   <Footer>
+    <a target="_blank" rel="noopener noreferrer" href="https://github.com/Secretmapper/react-image-annotation">Inspired by react-image-annotation</a>
     <p>
       {'Credits to '}
       <a href='//arianv.com'>@secretmapper</a>
