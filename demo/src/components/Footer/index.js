@@ -18,11 +18,15 @@ const Footer = styled.div`
 export default () => (
   <Footer>
     <p>
-      {'Made with <3 by '}
+      {'Credits to '}
       <a href='//arianv.com'>@secretmapper</a>
     </p>
   <p>
     Released under the MIT License
   </p>
+  <p>
+      {'Re-engineered by '}
+      <a href='https://github.com/hleote'>@hleote</a>
+    </p>
   </Footer>
 )

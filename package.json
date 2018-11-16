@@ -53,11 +53,10 @@
     ],
     "parser": "babel-eslint"
   },
-  "homepage": "",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/Secretmapper/react-image-annotation"
+    "url": "https://github.com/hleote/react-image-annotation-tool"
   },
   "keywords": [
     "react-component"

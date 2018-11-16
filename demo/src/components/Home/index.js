@@ -1,11 +1,6 @@
 import React, { Component } from 'react'
 import styled from 'styled-components'
 import Simple from '../Samples/Simple'
-import Highlight from '../Highlight'
-import GithubStarLink from '../GithubStarLink'
-import { ButtonLink } from '../Button'
-
-import simple from './simple.txt'
 
 const Hero = styled.div`
   text-align: center;
@@ -27,35 +22,18 @@ const Container = styled.main`
   max-width: 700px;
 `
 
-const GithubButton = styled.div`
-  margin-bottom: 16px;
-`
-
-export default class App extends Component {
+export default class App extends Component {  
   render () {
     return (
       <Container>
         <Hero>
-          <Title>React Image Annotation</Title>
+          <Title>Image annotation tool</Title>
           <Subtitle>
-            An infinitely customizable image annotation library built on React
+            Inspired by react-image-annotation
           </Subtitle>
-          <GithubButton>
-            <GithubStarLink />
-          </GithubButton>
-          <ButtonLink to='/docs'>
-            More Examples
-          </ButtonLink>
         </Hero>
-        <h2>Install</h2>
-        <Highlight>
-          npm install --save react-image-annotation
-        </Highlight>
-        <h2>Demo</h2>
+        <h3>Try it out by hoverring the image</h3>
         <Simple />
-        <Highlight>
-          {simple}
-        </Highlight>  
       </Container>
     )
   }

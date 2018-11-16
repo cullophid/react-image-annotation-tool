@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import Annotation from '../../../../../src'
 
 import Root from '../../Root'
-import img from '../../../img.jpeg'
+import img from '../../../img.jpg'
 
 export default class Simple extends Component {
   state = {
