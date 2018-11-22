@@ -14,6 +14,10 @@ export default class Simple extends Component {
     this.setState({ annotation })
   }
 
+  methodName = (methodName) => {
+    this.setState({methodName})
+  }
+
   onSubmit = (annotation) => {
     const { geometry, data } = annotation
 
@@ -29,19 +33,31 @@ export default class Simple extends Component {
     })
   }
 
+  removeAnnotation = (annotationId) => {
+    const annotationsTemp = [...this.state.annotations]
+    const annotations = annotationsTemp.filter(elem => elem.data.id !== annotationId)
+    this.setState({annotations})
+  }
+
+  doubleClick = (elemId) => {
+    this.removeAnnotation(elemId)
+  }
+
+
   render () {
     return (
       <Root>
         <Annotation
           src={img}
-          alt='Two pebbles anthropomorphized holding hands'
-
+          alt=''
           annotations={this.state.annotations}
-
           type={this.state.type}
+          removeAnnotation={this.removeAnnotation}
           value={this.state.annotation}
+          methodName={this.methodName}
           onChange={this.onChange}
           onSubmit={this.onSubmit}
+          doubleClick={this.doubleClick}
         />
       </Root>
     )

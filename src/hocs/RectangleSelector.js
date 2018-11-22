@@ -37,13 +37,11 @@ export const methods = {
     } else {
       return {}
     }
-
-    return annotation
   },
 
   onMouseUp (annotation, e) {
     if (annotation.selection) {
-      const { selection, geometry } = annotation
+      const { geometry } = annotation
 
       if (!geometry) {
         return {}

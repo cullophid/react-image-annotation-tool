@@ -60,14 +60,16 @@ export default {
       onSubmit={onSubmit}
     />
   ),
-  renderHighlight: ({ key, annotation, active }) => {
+  renderHighlight: ({ key, annotation, onClick, rectangleIsActive, isActive }) => {
     switch (annotation.geometry.type) {
       case RectangleSelector.TYPE:
         return (
           <Rectangle
             key={key}
+            rectangleIsActive={rectangleIsActive}
             annotation={annotation}
-            active={active}
+            isActive={isActive}
+            onClick={onClick}
           />
         )
       case PointSelector.TYPE:
@@ -96,20 +98,19 @@ export default {
       annotation={annotation}
     />
   ),
-  renderOverlay: ({ type, annotation }) => {
-    switch (type) {
-      case PointSelector.TYPE:
-        return (
-          <Overlay>
-            Click to Annotate
-          </Overlay>
-        )
-      default:
-        return (
-          <Overlay>
-            Click and Drag to Annotate
-          </Overlay>
-        )
+  renderOverlay: ({ type, isActive }) => {
+    if (type === RectangleSelector.TYPE && isActive) {
+      return (
+        <Overlay>
+          Double click to delete
+        </Overlay>
+      )
+    } else {
+      return (
+        <Overlay>
+          Click and Drag to Annotate
+        </Overlay>
+      )
     }
   }
 }

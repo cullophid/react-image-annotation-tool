@@ -11,6 +11,7 @@ const Container = styled.div`
   padding: 8px 16px;
   margin-top: 8px;
   margin-left: 8px;
+  z-index: 1;
 `
 
 function Content (props) {

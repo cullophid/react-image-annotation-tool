@@ -86,6 +86,24 @@ export default compose(
 
   static defaultProps = defaultProps
 
+  state = {
+    active: false
+  }
+
+  componentWillReceiveProps(newProps) {
+    if (this.props.annotations !== newProps.annotations && newProps.annotations.length === 0) {
+      this.rectangleIsActive(false)
+    }
+  }
+
+  rectangleIsActive = (isActive) => {
+    let res = isActive
+    if (res && this.props.annotations.length === 0) {
+      res = false
+    }
+    this.setState({isActive: res})
+  }
+
   setInnerRef = (el) => {
     this.container = el
     this.props.relativeMousePos.innerRef(el)
@@ -141,17 +159,16 @@ export default compose(
   }
 
   callSelectorMethod = (methodName, e) => {
+    this.props.methodName(methodName)
     if (this.props.disableAnnotation) {
       return
     }
-
     if (!!this.props[methodName]) {
       this.props[methodName](e)
     } else {
       const selector = this.getSelectorByType(this.props.type)
       if (selector && selector.methods[methodName]) {
         const value = selector.methods[methodName](this.props.value, e)
-
         if (typeof value === 'undefined') {
           if (process.env.NODE_ENV !== 'production') {
             console.error(`
@@ -182,18 +199,12 @@ export default compose(
     const { props } = this
     const {
       isMouseHovering,
-
       renderHighlight,
       renderContent,
       renderSelector,
       renderEditor,
       renderOverlay
     } = props
-
-    const topAnnotationAtMouse = this.getTopAnnotationAt(
-      this.props.relativeMousePos.x,
-      this.props.relativeMousePos.y
-    )
 
     return (
       <Container
@@ -213,8 +224,10 @@ export default compose(
           {props.annotations.map(annotation => (
             renderHighlight({
               key: annotation.data.id,
+              rectangleIsActive: this.rectangleIsActive,
               annotation,
-              active: this.shouldAnnotationBeActive(annotation, topAnnotationAtMouse)
+              isActive: this.state.isActive,
+              onClick: () => props.doubleClick(annotation.data.id)
             })
           ))}
           {!props.disableSelector
@@ -236,11 +249,12 @@ export default compose(
         {!props.disableOverlay && (
           renderOverlay({
             type: props.type,
+            isActive: this.state.isActive,
             annotation: props.value
           })
         )}
         {props.annotations.map(annotation => (
-          this.shouldAnnotationBeActive(annotation, topAnnotationAtMouse)
+          this.state.isActive
           && (
             renderContent({
               key: annotation.data.id,
@@ -260,6 +274,7 @@ export default compose(
             })
           )
         }
+ 
       </Container>
     )
   }
